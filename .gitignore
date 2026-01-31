@@ -1,0 +1,118 @@
+# --- LSP / Edytory ---
+compile_commands.json
+.clangd            
+.cache
+
+# Cache importów i wewnętrzne pliki Godot 4.x (Absolutnie kluczowe do zignorowania)
+.godot/
+
+# Pliki tymczasowe eksportu/debugowania
+*.tmp
+*.log
+
+# Ustawienia eksportu często zawierają hasła (np. do Android Keystore)
+# Odkomentuj linię poniżej, jeśli chcesz to ukryć (zalecane dla publicznych repo)
+# export_presets.cfg
+
+# Mono/C# (jeśli kiedyś dodasz C# - na razie opcjonalne)
+.mono/
+.vscode/extensions.json
+*.csproj
+*.sln
+
+# -----------------------------------------------------------------------------
+# C++ / GDEXTENSION (Kompilacja i Budowanie)
+# -----------------------------------------------------------------------------
+
+# Pliki obiektów (kompilacja pośrednia)
+*.o
+*.obj
+*.a
+*.lib
+
+# Pliki zależności (generowane przez SCons/GCC)
+*.d
+
+
+# Cache SConsa (przyspiesza kompilację, ale waży dużo - nie commitujemy)
+.scons_cache/
+.sconsign.dblite
+
+# Symbole debugowania (Linux/Mac)
+*.dSYM/
+
+# Pliki pośrednie Visual Studio / MSVC
+*.pdb
+*.ilk
+*.exp
+*.idb
+*.ipdb
+*.iobj
+
+# -----------------------------------------------------------------------------
+# GODOT-CPP (Bindings)
+# -----------------------------------------------------------------------------
+
+# Jeśli trzymasz godot-cpp jako submoduł lub folder wewnątrz:
+# Ignorujemy wygenerowane wiązania (gen) i skompilowane biblioteki statyczne godot-cpp
+godot-cpp/gen/
+godot-cpp/bin/
+godot-cpp/lib/
+
+# -----------------------------------------------------------------------------
+# WYNIKI KOMPILACJI (Binarki GDExtension)
+# -----------------------------------------------------------------------------
+# To jest ważna decyzja. Standardowo ignorujemy skompilowane biblioteki,
+# żeby każdy deweloper budował je sam.
+# Jeśli masz w zespole grafików bez kompilatora, możesz chcieć to ODKOMENTOWAĆ.
+
+# Folder, do którego trafiają gotowe biblioteki (zazwyczaj bin/ lub game/bin/)
+bin/
+demo/bin/
+
+# Rozszerzenia bibliotek dynamicznych (Linux, Windows, Mac)
+*.so
+*.dll
+*.dylib
+*.wasm
+
+# -----------------------------------------------------------------------------
+# IDE i EDYTORY (Pliki konfiguracyjne środowiska)
+# -----------------------------------------------------------------------------
+
+# Visual Studio Code
+.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Visual Studio
+.vs/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# CLion / IntelliJ / Rider
+.idea/
+cmake-build-*/
+
+# XCode
+*.xcodeproj/
+*.xcworkspace/
+
+# -----------------------------------------------------------------------------
+# SYSTEM OPERACYJNY
+# -----------------------------------------------------------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~

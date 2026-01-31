@@ -1,0 +1,154 @@
+[gd_resource type="VoxelGeneratorGraph" load_steps=3 format=3 uid="uid://7mlqvsrhyhn5"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_tx82l"]
+seed = 1323
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_6jttl"]
+seed = 1323
+
+[resource]
+graph_data = {
+"connections": [[41, 0, 44, 0], [40, 0, 38, 0], [39, 0, 8, 0], [9, 0, 17, 0], [38, 0, 27, 0], [8, 0, 9, 0], [37, 0, 43, 1], [32, 0, 24, 1], [3, 0, 14, 0], [27, 0, 37, 1], [26, 0, 32, 0], [26, 0, 22, 1], [26, 0, 31, 1], [1, 0, 13, 0], [43, 0, 4, 0], [14, 0, 39, 2], [13, 0, 39, 0], [44, 0, 43, 2], [44, 0, 43, 0], [15, 0, 39, 1], [31, 0, 40, 0], [2, 0, 15, 0], [16, 0, 14, 1], [16, 0, 13, 1], [16, 0, 20, 0], [17, 0, 37, 0], [20, 0, 15, 1], [21, 0, 31, 0], [22, 0, 40, 2], [23, 0, 24, 0], [24, 0, 40, 1], [25, 0, 22, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(380, -20),
+"type": "InputX"
+},
+"13": {
+"gui_position": Vector2(560, -20),
+"type": "Multiply"
+},
+"14": {
+"gui_position": Vector2(560, 180),
+"type": "Multiply"
+},
+"15": {
+"gui_position": Vector2(560, 80),
+"type": "Multiply"
+},
+"16": {
+"gui_position": Vector2(180, 280),
+"name": &"Frequency",
+"type": "Constant",
+"value": 0.7
+},
+"17": {
+"gui_position": Vector2(1100, 20),
+"max": 0.5,
+"min": -100.0,
+"type": "Clamp"
+},
+"2": {
+"gui_position": Vector2(380, 80),
+"type": "InputY"
+},
+"20": {
+"b": 2.0,
+"gui_position": Vector2(440, 300),
+"type": "Multiply"
+},
+"21": {
+"gui_position": Vector2(500, 460),
+"type": "InputX"
+},
+"22": {
+"gui_position": Vector2(680, 660),
+"type": "Multiply"
+},
+"23": {
+"gui_position": Vector2(500, 560),
+"type": "InputY"
+},
+"24": {
+"gui_position": Vector2(680, 560),
+"type": "Multiply"
+},
+"25": {
+"gui_position": Vector2(500, 660),
+"type": "InputZ"
+},
+"26": {
+"gui_position": Vector2(300, 760),
+"name": &"Frequency",
+"type": "Constant",
+"value": 0.7
+},
+"27": {
+"gui_position": Vector2(1180, 500),
+"max": 0.5,
+"min": -100.0,
+"type": "Clamp"
+},
+"3": {
+"gui_position": Vector2(380, 180),
+"type": "InputZ"
+},
+"31": {
+"gui_position": Vector2(680, 460),
+"type": "Multiply"
+},
+"32": {
+"b": 2.0,
+"gui_position": Vector2(560, 760),
+"type": "Multiply"
+},
+"37": {
+"gui_position": Vector2(1240, 260),
+"smoothness": 1.0,
+"type": "SdfSmoothUnion"
+},
+"38": {
+"b": 0.0,
+"gui_position": Vector2(1040, 500),
+"type": "Subtract"
+},
+"39": {
+"auto_connect": true,
+"gui_position": Vector2(700, 0),
+"noise": SubResource("ZN_FastNoiseLite_6jttl"),
+"type": "FastNoise3D"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1720, 300),
+"type": "OutputSDF"
+},
+"40": {
+"auto_connect": true,
+"gui_position": Vector2(880, 500),
+"noise": SubResource("ZN_FastNoiseLite_tx82l"),
+"type": "FastNoise3D"
+},
+"41": {
+"gui_position": Vector2(1320, 100),
+"type": "InputY"
+},
+"43": {
+"gui_position": Vector2(1580, 100),
+"threshold": 0.0,
+"type": "Select"
+},
+"44": {
+"b": -1.0,
+"gui_position": Vector2(1420, 100),
+"type": "Multiply"
+},
+"45": {
+"gui_position": Vector2(1380, 0),
+"gui_size": Vector2(220.90906, 88.727295),
+"text": "if Y > 0 then spawn solid rock
+Otherwise regular cave noise",
+"type": "Comment"
+},
+"8": {
+"gui_position": Vector2(860, 20),
+"type": "Abs"
+},
+"9": {
+"b": -0.2,
+"gui_position": Vector2(980, 20),
+"type": "Subtract"
+}
+},
+"version": 2
+}
