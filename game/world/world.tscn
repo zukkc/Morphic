@@ -8,26 +8,6 @@
 
 [sub_resource type="VoxelFormat" id="VoxelFormat_h5o24"]
 
-[sub_resource type="Environment" id="Environment_4717r"]
-background_mode = 1
-background_energy_multiplier = 0.0
-ssao_enabled = true
-sdfgi_enabled = true
-sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 1.0
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0, 0, 0, 1)
-fog_light_energy = 0.0
-fog_density = 1.0
-fog_depth_curve = 0.81225497
-fog_depth_begin = 70.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.01
-volumetric_fog_albedo = Color(0.27387273, 0.27387273, 0.27387273, 1)
-volumetric_fog_length = 100.0
-volumetric_fog_detail_spread = 0.9330329
-
 [node name="World" type="World"]
 terrain_path = NodePath("Terrain")
 player_scene = ExtResource("1_6xmxd")
@@ -47,6 +27,3 @@ material_override = ExtResource("2_tcf2h")
 use_gpu_generation = true
 
 [node name="TerrainMultiplayerSync" type="VoxelTerrainMultiplayerSynchronizer" parent="Terrain"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_4717r")

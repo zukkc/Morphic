@@ -35,6 +35,7 @@ private:
   float _sensitivity = 0.001;
 
   void setup_viewer();
+  void setup_player_camera();
 
   float get_speed() const;
   void set_speed(float p_speed);

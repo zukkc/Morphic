@@ -1,5 +1,4 @@
 #pragma once
-#include "player/player.h"
 
 #include <godot_cpp/classes/multiplayer_spawner.hpp>
 #include <godot_cpp/classes/node3d.hpp>
@@ -29,8 +28,6 @@ public:
                                           const Vector3i &p, int bs);
 
 private:
-  Vector<Player *> _players;
-
   MultiplayerSpawner *_player_spawner;
 
   NodePath _terrain_path;

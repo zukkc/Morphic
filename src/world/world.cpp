@@ -1,4 +1,5 @@
 #include "world.h"
+#include "player/player.h"
 #include "core/network_manager.h"
 #include "utils/debug_utils.h"
 #include "utils/network_utils.h"
@@ -50,6 +51,8 @@ void World::setup_player_spawner() {
 }
 
 void World::setup_server() {
+  ERR_FAIL_COND(!NetUtils::is_server(this));
+
   if (Engine::get_singleton()->is_editor_hint())
     return;
 
@@ -92,6 +95,7 @@ void World::setup_client() {
 
 void World::server_spawn_player(int p_peer_id) {
   ERR_FAIL_COND(!NetUtils::is_server(this));
+
   if (!_player_spawner) {
     ERR("PlayerSpawner is not set");
     return;
@@ -128,26 +132,6 @@ void World::server_spawn_player(int p_peer_id) {
 void World::server_despawn_player(int p_peer_id) {
   ERR_FAIL_COND(!NetUtils::is_server(this));
 
-  Node *players_root = get_node_or_null("Players");
-  if (!players_root) {
-    ERR("Players root not found");
-    return;
-  }
-
-  VAR(NetUtils::get_net_manager(this)->get_player_list());
-
-  Node *player_node = players_root->get_node_or_null(String::num(p_peer_id));
-  if (!player_node) {
-    WARN("Player node not found for peer_id %d", p_peer_id);
-    return;
-  }
-
-  Player *player = cast_to<Player>(player_node);
-  if (player) {
-    _players.erase(player);
-  }
-
-  player_node->queue_free();
 }
 
 Node *World::create_player(const Variant &p_data) {
@@ -171,7 +155,6 @@ Node *World::create_player(const Variant &p_data) {
   player->set_peer_id(peer_id);
   player->set_name(String::num(peer_id));
   player->set_position(spawn_pos);
-  _players.push_back(player);
 
   return player;
 }

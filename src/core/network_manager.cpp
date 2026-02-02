@@ -24,6 +24,7 @@ bool NetworkManager::start_host(int port) {
   } else {
     NetUtils::get_mp(this)->set_multiplayer_peer(peer);
     connected_players[1] = "Host";
+    emit_signal("player_joined", 1);
     LOG("Successfuly created the server");
     return true;
   }
