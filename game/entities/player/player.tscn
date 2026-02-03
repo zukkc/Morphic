@@ -21,6 +21,7 @@ visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1144346931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6434665, 0)
+current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2090861134]
 visible = false
@@ -32,11 +33,11 @@ skin = SubResource("Skin_symyc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2780621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1963235, 0.802596, -1.0915706)
-light_color = Color(0.84730095, 0.58403075, 0, 1)
-light_energy = 5.0
+light_color = Color(0.9907314, 0.56134963, 0.22210959, 1)
+light_energy = 2.0
 light_indirect_energy = 3.0
 light_volumetric_fog_energy = 5.0
-light_size = 1.0
+light_size = 30.0
 light_specular = 1.684
 shadow_enabled = true
 shadow_bias = 0.2

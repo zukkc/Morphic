@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://8dc1babhqmdx"]
+
+[node name="MainMenu" type="MainMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 56.0
+offset_right = 276.0
+offset_bottom = 104.0
+text = "HOST"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 57.0
+offset_right = 525.0
+offset_bottom = 105.0
+text = "JOIN"
+
+[connection signal="pressed" from="Button" to="." method="on_host_pressed"]
+[connection signal="pressed" from="Button2" to="." method="on_join_pressed"]

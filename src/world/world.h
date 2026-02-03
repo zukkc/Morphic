@@ -17,10 +17,6 @@ protected:
   static void _bind_methods();
 
 public:
-  World();
-  ~World();
-
-  void _enter_tree() override;
   void _ready() override;
 
   // static
@@ -28,35 +24,20 @@ public:
                                           const Vector3i &p, int bs);
 
 private:
-  MultiplayerSpawner *_player_spawner;
-
   NodePath _terrain_path;
-  VoxelTerrain *_terrain;
-  Ref<PackedScene> _player_scene_prefab;
+  VoxelTerrain *_terrain = nullptr;
   Ref<VoxelTool> _vt;
 
   void setup_server();
   void setup_client();
-  void setup_player_spawner();
 
-  Vector3 calc_spawn_position();
-  Node *create_player(const Variant &p_data);
   void set_voxel_tool();
-
-  // server
-
-  void server_spawn_player(int p_peer_id);
-  void server_despawn_player(int p_peer_id);
 
   // inspector getters and setters
 
   NodePath get_terrain_path() const;
   void set_terrain_path(const NodePath p_path);
-  Ref<PackedScene> get_player_scene() const;
-  void set_player_scene(const Ref<PackedScene> &p_scene);
-
   void connect_terrain_node();
-  void check_player_scene_status();
 };
 
 } // namespace morphic

@@ -1,7 +1,9 @@
 #include "register_types.h"
 #include "network_manager.h"
+#include "player/local_player_controller.h"
 #include "player/player.h"
 #include "ui/main_menu.h"
+#include "world/player_spawner.h"
 #include "world/world.h"
 
 #include <godot_cpp/core/class_db.hpp>
@@ -18,7 +20,9 @@ void initialize_morphic_module(ModuleInitializationLevel p_level) {
   }
   ClassDB::register_class<morphic::NetworkManager>();
   ClassDB::register_class<morphic::World>();
+  ClassDB::register_class<morphic::PlayerSpawner>();
   ClassDB::register_class<morphic::Player>();
+  ClassDB::register_class<morphic::LocalPlayerController>();
   ClassDB::register_class<morphic::MainMenu>();
   UtilityFunctions::print("morphic_core loaded!");
 }

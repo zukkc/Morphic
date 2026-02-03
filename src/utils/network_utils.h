@@ -15,13 +15,13 @@ namespace NetUtils {
 
 inline Ref<MultiplayerAPI> get_mp(const Node *context) {
   if (context == nullptr) {
-    ERR("NetUtils: Context is null!");
+    ERR_PRINT("NetUtils: Context is null!");
     return Ref<MultiplayerAPI>();
   }
 
   SceneTree *tree = context->get_tree();
   if (tree == nullptr) {
-    ERR("NetUtils: Node is not inside SceneTree!");
+    ERR_PRINT("NetUtils: Node is not inside SceneTree!");
     return Ref<MultiplayerAPI>();
   }
 
@@ -40,7 +40,7 @@ inline DisplayServer *get_server() { return DisplayServer::get_singleton(); }
 
 inline bool is_context_valid(const Node *context) {
   if (context == nullptr) {
-    ERR("NetUtils: Context is null!");
+    ERR_PRINT("NetUtils: Context is null!");
     return false;
   }
   return true;
@@ -56,14 +56,14 @@ inline bool is_headless() {
 
 inline NetworkManager *get_net_manager(const Node *context) {
   if (context == nullptr) {
-    ERR("NetUtils: Context is null!");
+    ERR_PRINT("NetUtils: Context is null!");
     return nullptr;
   }
 
   NetworkManager *net_manager = Object::cast_to<NetworkManager>(
       context->get_node_or_null("/root/GlobalNetworkManager"));
   if (!net_manager) {
-    ERR("CRITICAL: Brak NetworkManagera w /root!");
+    ERR_PRINT("CRITICAL: Brak NetworkManagera w /root!");
     return nullptr;
   }
 

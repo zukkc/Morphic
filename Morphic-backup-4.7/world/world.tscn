@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://so1jd5n8dfk8"]
+
+[ext_resource type="PackedScene" uid="uid://c03pnjrc3s0g" path="res://entities/player/player.tscn" id="1_6xmxd"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://7mlqvsrhyhn5" path="res://world/terrain/cave_generator.tres" id="2_4717r"]
+[ext_resource type="Material" uid="uid://bs0lsrrq2yk23" path="res://world/terrain/stone.tres" id="2_tcf2h"]
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_4717r"]
+
+[sub_resource type="VoxelFormat" id="VoxelFormat_h5o24"]
+
+[sub_resource type="Environment" id="Environment_4717r"]
+background_mode = 1
+background_color = Color(0.019607844, 0.019607844, 0.03137255, 1)
+ambient_light_source = 2
+ambient_light_energy = 0.1
+tonemap_mode = 3
+tonemap_exposure = 1.2
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 3.5
+glow_enabled = true
+glow_levels/3 = 1.0
+glow_levels/4 = 1.0
+glow_levels/5 = 0.8
+glow_levels/6 = 0.2
+glow_intensity = 1.0
+glow_bloom = 0.1
+glow_blend_mode = 2
+
+[node name="World" type="World" unique_id=841841150]
+terrain_path = NodePath("Terrain")
+
+[node name="Players" type="Node3D" parent="." unique_id=1033303314]
+
+[node name="PlayerSpawner" type="PlayerSpawner" parent="." unique_id=1264448021]
+player_scene = ExtResource("1_6xmxd")
+spawn_path = NodePath("../Players")
+
+[node name="Terrain" type="VoxelTerrain" parent="." unique_id=18280204]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+generator = ExtResource("2_4717r")
+mesher = SubResource("VoxelMesherTransvoxel_4717r")
+format = SubResource("VoxelFormat_h5o24")
+max_view_distance = 96
+material_override = ExtResource("2_tcf2h")
+use_gpu_generation = true
+
+[node name="TerrainMultiplayerSync" type="VoxelTerrainMultiplayerSynchronizer" parent="Terrain" unique_id=1385724455]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1547952419]
+environment = SubResource("Environment_4717r")

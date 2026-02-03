@@ -19,7 +19,9 @@ bool NetworkManager::start_host(int port) {
   peer.instantiate();
   Error err = peer->create_server(port);
   if (err != Error::OK) {
-    ERR("Error: failed creating the server. status: %d", err);
+    ERR_PRINT(
+        DebugUtils::format_log("Error: failed creating the server. status: %d",
+                               err));
     return false;
   } else {
     NetUtils::get_mp(this)->set_multiplayer_peer(peer);
@@ -35,7 +37,8 @@ bool NetworkManager::start_client(const String &p_address, int p_port) {
   peer.instantiate();
   Error err = peer->create_client(p_address, p_port);
   if (err != Error::OK) {
-    ERR("Error: failed joining to the server. status: %d", err);
+    ERR_PRINT(DebugUtils::format_log(
+        "Error: failed joining to the server. status: %d", err));
     return false;
   } else {
     NetUtils::get_mp(this)->set_multiplayer_peer(peer);
