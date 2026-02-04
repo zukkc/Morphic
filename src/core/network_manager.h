@@ -23,6 +23,9 @@ public:
 
   void _on_peer_connected(int peer_id);
   void _on_peer_disconnected(int peer_id);
+  void _on_connected_to_server();
+  void _on_connection_failed();
+  void _on_server_disconnected();
 
   inline Dictionary get_player_list() const { return connected_players; }
 };

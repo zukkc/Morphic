@@ -5,6 +5,7 @@
 #include "ui/main_menu.h"
 #include "world/player_spawner.h"
 #include "world/world.h"
+#include "world_loader.h"
 
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
@@ -24,6 +25,7 @@ void initialize_morphic_module(ModuleInitializationLevel p_level) {
   ClassDB::register_class<morphic::Player>();
   ClassDB::register_class<morphic::LocalPlayerController>();
   ClassDB::register_class<morphic::MainMenu>();
+  ClassDB::register_class<morphic::WorldLoader>();
   UtilityFunctions::print("morphic_core loaded!");
 }
 

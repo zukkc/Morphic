@@ -34,11 +34,7 @@ void PlayerSpawner::server_bind_spawner_to_network() {
 
   ERR_FAIL_COND_MSG(!net_manager, "CRITICAL: Brak NetworkManagera w /root!");
 
-  Error err = net_manager->connect("player_joined",
-                                   Callable(this, "server_spawn_player"));
-  if (err != OK) {
-    ERR_PRINT(DebugUtils::format_log("Connect player_joined failed: %d", err));
-  }
+  net_manager->connect("player_joined", Callable(this, "server_spawn_player"));
   net_manager->connect("player_left", Callable(this, "server_despawn_player"));
 
   Dictionary players = net_manager->get_player_list();
