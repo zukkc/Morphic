@@ -30,7 +30,7 @@ inline Ref<MultiplayerAPI> get_mp(const Node *context) {
 
 inline bool is_server(const Node *context) {
   Ref<MultiplayerAPI> mp = get_mp(context);
-  if (mp.is_valid()) {
+  if (mp.is_valid() && mp->has_multiplayer_peer()) {
     return mp->is_server();
   }
   return false;

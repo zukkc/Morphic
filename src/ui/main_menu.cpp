@@ -15,12 +15,20 @@ void MainMenu::_ready() {
   if (Engine::get_singleton()->is_editor_hint())
     return;
 
+  _world_loader = get_node<WorldLoader>(_world_loader_path);
+  ERR_FAIL_COND_MSG(
+      !_world_loader,
+      "Cant get WorldLoader in main menu. Check if path is correct");
+
   _net_manager = NetUtils::get_net_manager(this);
   ERR_FAIL_COND_MSG(!_net_manager, "Cant get NetworkManager in main_menu");
-  _world_loader =
-      cast_to<WorldLoader>(get_node_or_null("/root/GlobalWorldLoader"));
-  ERR_FAIL_COND_MSG(!_world_loader,
-                    "Cant get WorldLoader with path: /root/GlobalWorldLoader");
+  _save_manager =
+      cast_to<SaveManager>(get_node_or_null("/root/GlobalSaveManager"));
+  ERR_FAIL_COND_MSG(!_save_manager,
+                    "Cant get SaveManager with path: /root/GlobalSaveManager");
+  ERR_FAIL_COND_MSG(
+      !_session_flow.configure(_net_manager, _world_loader, _save_manager),
+      "MainMenu: failed configuring SessionFlow");
 
   Error err = _net_manager->connect("connection_success",
                                     Callable(this, "on_connection_success"));
@@ -34,47 +42,59 @@ void MainMenu::_ready() {
     ERR_PRINT(
         DebugUtils::format_log("connect connection_failed failed: %d", err));
   }
+
+  err = _world_loader->connect("loading_finished",
+                               Callable(this, "on_world_loading_finished"));
+  if (err != OK) {
+    ERR_PRINT(
+        DebugUtils::format_log("connect loading_finished failed: %d", err));
+  }
+
+  err = _world_loader->connect("loading_failed",
+                               Callable(this, "on_world_loading_failed"));
+  if (err != OK) {
+    ERR_PRINT(DebugUtils::format_log("connect loading_failed failed: %d", err));
+  }
 }
 
 void MainMenu::on_host_pressed() {
-  ERR_FAIL_COND_MSG(!_net_manager, "NetworkManager not found");
-  ERR_FAIL_COND_MSG(!_world_loader, "WorldLoader not found");
-
-  const bool result = _net_manager->start_host(_host_port);
-  if (!result) {
-    ERR_PRINT("Failed starting host");
-    return;
-  }
-
-  String save_path = _saves_path;
-  if (!_saves_path.is_empty() && !_save_name.is_empty()) {
-    save_path = _saves_path.path_join(_save_name);
-  } else if (save_path.is_empty() && !_save_name.is_empty()) {
-    save_path = _save_name;
-  }
-
-  ERR_FAIL_COND_MSG(save_path.is_empty(),
-                    "Save path is empty. Set saves_path/save_name.");
-  _world_loader->load_game(save_path, true, true, _seed);
+  _session_flow.request_host(_world_scene_path, _host_port, _saves_path,
+                             _save_name, _seed);
 }
 
 void MainMenu::on_join_pressed() {
-  ERR_FAIL_COND_MSG(!_net_manager, "NetworkManager not found");
-  const bool result = _net_manager->start_client(_join_address, _join_port);
-  if (!result) {
-    ERR_PRINT("Failed connecting to server");
+  String expected_world_id = _saves_path;
+  if (!_saves_path.is_empty() && !_save_name.is_empty()) {
+    expected_world_id = _saves_path.path_join(_save_name);
+  } else if (expected_world_id.is_empty() && !_save_name.is_empty()) {
+    expected_world_id = _save_name;
   }
+
+  _session_flow.request_join(_world_scene_path, _join_address, _join_port,
+                             expected_world_id);
 }
 
-void MainMenu::on_connection_success() {
-  if (!_world_loader) {
-    ERR_PRINT("WorldLoader not found");
-    return;
-  }
-  _world_loader->load_game("", false);
+void MainMenu::on_connection_success() { _session_flow.on_connection_success(); }
+
+void MainMenu::on_connection_failed() { _session_flow.on_connection_failed(); }
+
+void MainMenu::on_world_loading_finished() {
+  _session_flow.on_world_loading_finished();
 }
 
-void MainMenu::on_connection_failed() { WARN_PRINT("Connection failed"); }
+void MainMenu::on_world_loading_failed(const String &error) {
+  _session_flow.on_world_loading_failed(error);
+}
+
+String MainMenu::get_world_scene_path() const { return _world_scene_path; }
+void MainMenu::set_world_scene_path(String p_path) {
+  _world_scene_path = p_path;
+}
+
+NodePath MainMenu::get_world_loader_path() const { return _world_loader_path; }
+void MainMenu::set_world_loader_path(NodePath p_path) {
+  _world_loader_path = p_path;
+}
 
 int MainMenu::get_seed() const { return _seed; }
 void MainMenu::set_seed(int p_seed) { _seed = p_seed; }
@@ -104,7 +124,15 @@ void MainMenu::_bind_methods() {
                        &MainMenu::on_connection_success);
   ClassDB::bind_method(D_METHOD("on_connection_failed"),
                        &MainMenu::on_connection_failed);
+  ClassDB::bind_method(D_METHOD("on_world_loading_finished"),
+                       &MainMenu::on_world_loading_finished);
+  ClassDB::bind_method(D_METHOD("on_world_loading_failed", "error"),
+                       &MainMenu::on_world_loading_failed);
 
+  BIND_PROPERTY(MainMenu, Variant::STRING, "world_scene_path",
+                world_scene_path);
+  BIND_PROPERTY(MainMenu, Variant::NODE_PATH, "world_loader_path",
+                world_loader_path);
   BIND_PROPERTY(MainMenu, Variant::STRING, "saves_path", saves_path);
   BIND_PROPERTY(MainMenu, Variant::STRING, "save_name", save_name);
   BIND_PROPERTY(MainMenu, Variant::STRING, "join_address", join_address);

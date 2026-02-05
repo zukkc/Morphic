@@ -1,5 +1,6 @@
 #pragma once
 
+#include "godot_cpp/classes/voxel_generator_graph.hpp"
 #include <godot_cpp/classes/multiplayer_spawner.hpp>
 #include <godot_cpp/classes/node3d.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
@@ -17,19 +18,17 @@ protected:
   static void _bind_methods();
 
 public:
+  void _enter_tree() override;
   void _ready() override;
 
-  // static
-  static Vector3 compute_normal_one_sided(const Ref<VoxelBuffer> &buf,
-                                          const Vector3i &p, int bs);
+  // should be called by WorldLoader
+  void setup_server(Dictionary p_save_info);
+  void setup_client(Dictionary p_save_info);
 
 private:
   NodePath _terrain_path;
   VoxelTerrain *_terrain = nullptr;
   Ref<VoxelTool> _vt;
-
-  void setup_server();
-  void setup_client();
 
   void set_voxel_tool();
 
@@ -38,6 +37,9 @@ private:
   NodePath get_terrain_path() const;
   void set_terrain_path(const NodePath p_path);
   void connect_terrain_node();
+  void apply_seed_to_all_graph_noises(Ref<VoxelGeneratorGraph> generator,
+                                      int global_seed);
+  void _on_mesh_block_entered(Vector3i p_pos);
 };
 
 } // namespace morphic

@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://8dc1babhqmdx"]
 
 [node name="MainMenu" type="MainMenu" unique_id=1357433607]
-save_name = "world55"
-seed = 120
+world_loader_path = NodePath("WorldLoader")
+save_name = "world554"
+seed = 555
 
 [node name="Button" type="Button" parent="." unique_id=1258071934]
 layout_mode = 0
@@ -19,6 +20,8 @@ offset_top = 57.0
 offset_right = 525.0
 offset_bottom = 105.0
 text = "JOIN"
+
+[node name="WorldLoader" type="WorldLoader" parent="." unique_id=1037897487]
 
 [connection signal="pressed" from="Button" to="." method="on_host_pressed"]
 [connection signal="pressed" from="Button2" to="." method="on_join_pressed"]

@@ -1,12 +1,16 @@
 #pragma once
-#include "core/world_loader.h"
+#include "session/session_flow.h"
+#include "saves/save_manager.h"
+#include "world/world_loader.h"
 #include <core/network_manager.h>
 #include <godot_cpp/classes/control.hpp>
 
+using namespace godot;
+
 namespace morphic {
 
-class MainMenu : public godot::Control {
-  GDCLASS(MainMenu, godot::Control)
+class MainMenu : public Control {
+  GDCLASS(MainMenu, Control)
 
 protected:
   static void _bind_methods();
@@ -16,7 +20,12 @@ public:
 
 private:
   NetworkManager *_net_manager = nullptr;
+  SaveManager *_save_manager = nullptr;
   WorldLoader *_world_loader = nullptr;
+  SessionFlow _session_flow;
+
+  String _world_scene_path = "res://world/world.tscn";
+  NodePath _world_loader_path;
   String _saves_path = "user://saves";
   String _save_name = "world";
   String _join_address = "localhost";
@@ -28,7 +37,13 @@ private:
   void on_join_pressed();
   void on_connection_success();
   void on_connection_failed();
+  void on_world_loading_finished();
+  void on_world_loading_failed(const String &error);
 
+  NodePath get_world_loader_path() const;
+  void set_world_loader_path(NodePath p_path);
+  String get_world_scene_path() const;
+  void set_world_scene_path(String p_path);
   int get_seed() const;
   void set_seed(int p_seed);
   String get_saves_path() const;

@@ -24,7 +24,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalNetworkManager="*res://core/NetworkManager.tscn"
-GlobalWorldLoader="*uid://b27trnhg681a"
+GlobalSaveManager="*uid://c63x4lue71kop"
 
 [input]
 

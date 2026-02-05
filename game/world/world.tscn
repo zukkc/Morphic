@@ -48,7 +48,7 @@ player_scene = ExtResource("1_6xmxd")
 spawn_path = NodePath("../Players")
 
 [node name="Terrain" type="VoxelTerrain" parent="." unique_id=18280204]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 generator = ExtResource("2_4717r")
 mesher = SubResource("VoxelMesherTransvoxel_4717r")
 format = SubResource("VoxelFormat_h5o24")

@@ -34,11 +34,11 @@ void PlayerSpawner::server_bind_spawner_to_network() {
 
   ERR_FAIL_COND_MSG(!net_manager, "CRITICAL: Brak NetworkManagera w /root!");
 
-  net_manager->connect("player_joined", Callable(this, "server_spawn_player"));
+  net_manager->connect("player_ready_for_spawn",
+                       Callable(this, "server_spawn_player"));
   net_manager->connect("player_left", Callable(this, "server_despawn_player"));
 
-  Dictionary players = net_manager->get_player_list();
-  Array ids = players.keys();
+  Array ids = net_manager->get_ready_player_ids();
 
   for (int i = 0; i < ids.size(); i++) {
     int id = ids[i];

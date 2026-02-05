@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c03pnjrc3s0g"]
 
+[ext_resource type="PackedScene" uid="uid://cy1ao4k3oecge" path="res://entities/player/Universal Base Characters[Standard]/player_model.tscn" id="1_symyc"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e5uuo"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_sfv1e"]
-
-[sub_resource type="Skin" id="Skin_symyc"]
+radius = 0.4
+height = 1.9
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sfv1e"]
 properties/0/path = NodePath(".:position")
@@ -15,21 +15,20 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Player" type="Player" unique_id=1770935337]
+speed = 3.5
+friction = 15.0
 
 [node name="Head" type="Node3D" parent="." unique_id=250006123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6873544, 0)
 visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1144346931]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6434665, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19032505)
 current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2090861134]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91197276, 0)
 shape = SubResource("CapsuleShape3D_e5uuo")
-
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2115946520]
-mesh = SubResource("CylinderMesh_sfv1e")
-skin = SubResource("Skin_symyc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2780621]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1963235, 0.802596, -1.0915706)
@@ -45,3 +44,8 @@ omni_range = 31.134676
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1019104167]
 replication_config = SubResource("SceneReplicationConfig_sfv1e")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=1046459804]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Superhero_Male_FullBody" parent="Visuals" unique_id=1772157168 instance=ExtResource("1_symyc")]
