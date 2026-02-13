@@ -1,0 +1,7 @@
+[gd_resource type="ItemDatabase" format=3 uid="uid://cky4hvvm3grdd"]
+
+[ext_resource type="ItemDefinition" uid="uid://by2fkrkks1uf5" path="res://items/item_torch.tres" id="1_oxgme"]
+[ext_resource type="ItemDefinition" uid="uid://bi182tni3at7j" path="res://items/item_picaxe.tres" id="2_55eqg"]
+
+[resource]
+items = [ExtResource("1_oxgme"), ExtResource("2_55eqg")]

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ubb3lilgj4m8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4u0j4"]
+albedo_color = Color(0.36010075, 0.2564138, 0.08282141, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fokl5"]
+material = SubResource("StandardMaterial3D_4u0j4")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.4
+
+[node name="Torch" type="Node3D" unique_id=627874170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.068, 0)
+
+[node name="mesh" type="MeshInstance3D" parent="." unique_id=1403946133]
+mesh = SubResource("CylinderMesh_fokl5")
+
+[node name="fire" type="OmniLight3D" parent="." unique_id=2020541562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25231835, 0)
+light_color = Color(0.74510735, 0.49148238, 0.14157045, 1)
+light_energy = 4.0
+light_volumetric_fog_energy = 2.0
+light_size = 64.0

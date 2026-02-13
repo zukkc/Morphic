@@ -3,7 +3,7 @@
 [node name="MainMenu" type="MainMenu" unique_id=1357433607]
 world_loader_path = NodePath("WorldLoader")
 save_name = "world554"
-seed = 555
+seed = 44
 
 [node name="Button" type="Button" parent="." unique_id=1258071934]
 layout_mode = 0

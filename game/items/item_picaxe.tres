@@ -1,0 +1,15 @@
+[gd_resource type="ItemDefinition" format=3 uid="uid://bi182tni3at7j"]
+
+[ext_resource type="PackedScene" uid="uid://d0kyvlusyumah" path="res://items/prefabs/picaxe.tscn" id="1_hmgxt"]
+
+[sub_resource type="ItemAction" id="ItemAction_hmgxt"]
+action = "primary"
+full_body_state = "picaxe_mine"
+
+[resource]
+id = 2
+name = "picaxe"
+equip_state = "picaxe"
+model_scene = ExtResource("1_hmgxt")
+hand_playback = "right_hand"
+actions = [SubResource("ItemAction_hmgxt")]

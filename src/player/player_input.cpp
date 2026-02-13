@@ -16,6 +16,11 @@ void PlayerInput::poll_actions() {
   _state.move = input->get_vector("move_left", "move_right", "move_forward",
                                   "move_backward");
   _state.jump = input->is_action_just_pressed("jump");
+  _state.is_sprinting = input->is_action_pressed("sprint");
+  _state.primary_action = input->is_action_pressed("primary_action");
+  _state.secondary_action = input->is_action_pressed("secondary_action");
+  _state.toggle_torch = input->is_action_just_pressed("toggle_torch");
+  _state.toggle_picaxe = input->is_action_just_pressed("toggle_picaxe");
 }
 
 void PlayerInput::handle_input(const Ref<InputEvent> &event) {

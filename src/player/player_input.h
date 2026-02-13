@@ -10,7 +10,12 @@ namespace morphic {
 struct PlayerInputState {
   Vector2 move;
   Vector2 look;
+  bool primary_action = false;
+  bool secondary_action = false;
   bool jump = false;
+  bool is_sprinting = false;
+  bool toggle_torch = false;
+  bool toggle_picaxe = false;
 };
 
 class PlayerInput {

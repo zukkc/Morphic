@@ -1,7 +1,5 @@
 #include "local_player_controller.h"
-
 #include "player.h"
-#include "utils/debug_utils.h"
 
 #include <godot_cpp/classes/engine.hpp>
 
@@ -56,9 +54,22 @@ void LocalPlayerController::_physics_process(double delta) {
   _input_state.poll_actions();
   PlayerInputState state = _input_state.consume();
 
+  if (state.primary_action) {
+    _player->trigger_right_item_action("primary");
+  }
+
+  // toggle
+  if (state.toggle_torch) {
+    _player->toggle_torch();
+  }
+  if (state.toggle_picaxe) {
+    _player->toggle_picaxe();
+  }
+  //
+
   _movement.tick(*_player, state, delta);
   if (_camera_ready) {
-    _camera.tick(state, _player->get_sens());
+    _camera.tick(state, _player->get_sensitivity());
   }
 }
 

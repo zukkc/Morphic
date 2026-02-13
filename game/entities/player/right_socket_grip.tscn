@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://vur2mqhiha8b"]
+
+[node name="Socket_R" type="Marker3D" unique_id=1296656423]
+transform = Transform3D(-0.024487719, 0.9753269, -0.21940522, 0.9618351, 0.082816884, 0.26079744, 0.27253366, -0.2046449, -0.94013196, 0, 0, 0)

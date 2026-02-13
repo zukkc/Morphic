@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bs0lsrrq2yk23"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bs0lsrrq2yk23"]
 
 [ext_resource type="Texture2D" uid="uid://bocsseqi6me4" path="res://world/terrain/Rock058_2K-JPG/Rock058_2K-JPG_Color.jpg" id="1_yxuef"]
 [ext_resource type="Texture2D" uid="uid://emp6t3j0kn65" path="res://world/terrain/Rock058_2K-JPG/Rock058_2K-JPG_AmbientOcclusion.jpg" id="2_yv3px"]

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d0kyvlusyumah"]
+
+[ext_resource type="ArrayMesh" uid="uid://b832twfaq5gxn" path="res://items/meshes/picaxe.res" id="1_7lyhu"]
+
+[node name="Picaxe" type="Node3D" unique_id=1968346045]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="mesh" type="MeshInstance3D" parent="." unique_id=1628578456]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, -0.036054403, 0.3656766, -0.11658533)
+mesh = ExtResource("1_7lyhu")

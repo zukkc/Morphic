@@ -1,7 +1,12 @@
 #include "register_types.h"
 #include "core/network_manager.h"
+#include "items/item_action.h"
+#include "items/item_database.h"
+#include "items/item_definition.h"
 #include "player/local_player_controller.h"
 #include "player/player.h"
+#include "player/player_animator.h"
+#include "player/player_equipment.h"
 #include "saves/save_manager.h"
 #include "ui/main_menu.h"
 #include "world/player_spawner.h"
@@ -21,9 +26,14 @@ void initialize_morphic_module(ModuleInitializationLevel p_level) {
     return;
   }
   ClassDB::register_class<morphic::NetworkManager>();
+  ClassDB::register_class<morphic::ItemAction>();
+  ClassDB::register_class<morphic::ItemDefinition>();
+  ClassDB::register_class<morphic::ItemDatabase>();
   ClassDB::register_class<morphic::World>();
   ClassDB::register_class<morphic::PlayerSpawner>();
   ClassDB::register_class<morphic::Player>();
+  ClassDB::register_class<morphic::PlayerAnimator>();
+  ClassDB::register_class<morphic::PlayerEquipment>();
   ClassDB::register_class<morphic::LocalPlayerController>();
   ClassDB::register_class<morphic::MainMenu>();
   ClassDB::register_class<morphic::WorldLoader>();

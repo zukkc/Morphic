@@ -1,0 +1,11 @@
+[gd_resource type="ItemDefinition" format=3 uid="uid://by2fkrkks1uf5"]
+
+[ext_resource type="PackedScene" uid="uid://ubb3lilgj4m8" path="res://items/prefabs/torch.tscn" id="1_lirb3"]
+
+[resource]
+id = 1
+name = "torch"
+hand = 0
+equip_state = "torch"
+model_scene = ExtResource("1_lirb3")
+hand_playback = "left_hand"
